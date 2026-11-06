@@ -65,6 +65,21 @@ codex /build
 
 ---
 
+### 4. 📡 Integrasi MikroTik RouterOS API (`comitidn/routeros-api`)
+Codex memiliki kemampuan bawaan untuk membuat skrip PHP jaringan MikroTik menggunakan package Anda:
+* Pasang package langsung:
+  ```bash
+  codex /mikrotik
+  # atau
+  composer require comitidn/routeros-api:dev-dev-main
+  ```
+* Contoh perintah AI:
+  ```bash
+  codex "buat file cek_mikrotik.php menggunakan comitidn/routeros-api untuk monitoring trafik interface ether1 dan daftar user hotspot"
+  ```
+
+---
+
 ## 📥 Instalasi di Laptop / Komputer Baru
 
 ### Di Windows (PowerShell / CMD)

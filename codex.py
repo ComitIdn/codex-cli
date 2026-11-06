@@ -124,9 +124,12 @@ def get_system_prompt():
     return {
         "role": "system",
         "content": (
-            f"Kamu adalah Codex AI Full-Stack Software Engineer & DevOps Master. "
+            f"Kamu adalah Codex AI Full-Stack Software Engineer, Network Engineer & DevOps Master. "
             f"Platform: {PLATFORM_NAME}. Package Manager: {DEFAULT_PKG_MGR}. OS: {OS_TYPE}. "
             f"Keahlian penuh mencakup: HTML5, CSS3, JS/TS, Python, Java, PHP (XAMPP/Laragon/Laravel), SQL/MySQL, C/C++, Go, Rust, JSON. "
+            f"Keahlian Khusus Jaringan & MikroTik: Sangat menguasai library PHP 'comitidn/routeros-api' untuk berkomunikasi dengan MikroTik RouterOS melalui port API 8728 (atau 8729 SSL). "
+            f"Mampu membuat skrip monitoring trafik interface, manajemen Hotspot voucher/users, PPPoE Secrets, Simple Queues bandwidth, IP Address, dan resource router menggunakan class RouterOSAPI. "
+            f"Untuk instalasi via Composer gunakan: composer require comitidn/routeros-api:dev-dev-main. "
             f"Mampu mengedit, merapikan, memilih arsitektur, mendebug error, membuild, dan menganalisa sistem. "
             f"Berikan jawaban profesional, kode siap pakai, dan perintah shell yang tepat."
         )
@@ -199,6 +202,7 @@ HTML_GUI = """<!DOCTYPE html>
             <div class="status-badge">● Sistem Aktif (__BACKEND__)</div>
         </header>
         <div class="presets">
+            <span class="preset-btn" onclick="sendQuick('buat file mikrotik.php koneksi ke routeros menggunakan comitidn/routeros-api untuk cek resource dan interface')">📡 MikroTik API (comitidn)</span>
             <span class="preset-btn" onclick="sendQuick('buatkan CRUD PHP MySQL lengkap')">⚡ CRUD PHP</span>
             <span class="preset-btn" onclick="sendQuick('buat script python scraper data json')">🐍 Python JSON</span>
             <span class="preset-btn" onclick="sendQuick('buatkan REST API Java Spring Boot')">☕ Java Spring</span>
@@ -415,6 +419,17 @@ def main():
                 try: port = int(sys.argv[i+1])
                 except ValueError: pass
         start_gui_server(b_type, b_endpoint, b_model, port)
+        return
+
+    # Periksa perintah khusus /mikrotik
+    if len(sys.argv) > 1 and sys.argv[1] == "/mikrotik":
+        print(f"\n{C_CYAN}{C_BOLD}📡 Menyiapkan Proyek MikroTik PHP (comitidn/routeros-api)...{C_RESET}")
+        cmd = "composer require comitidn/routeros-api:dev-dev-main"
+        print(f"{C_YELLOW}Perintah:{C_RESET} {cmd}")
+        pilihan = input(f"{C_BOLD}Jalankan composer require sekarang? [Y/n]: {C_RESET}").strip().lower()
+        if pilihan in ["", "y", "ya", "yes"]:
+            subprocess.run(cmd, shell=True)
+            print(f"\n{C_GREEN}✓ comitidn/routeros-api berhasil dipasang!{C_RESET}")
         return
 
     # 2. Mode One-shot CLI arguments
