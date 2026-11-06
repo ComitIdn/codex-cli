@@ -1,54 +1,82 @@
-# 🤖 Codex Universal CLI
+# 🤖 Codex Universal CLI & Studio v4.0
 
-Asisten AI Coding & Terminal Multi-Platform cerdas untuk **Android Termux, Linux, Windows (PowerShell & CMD), dan macOS**.
-
-## 🌟 Fitur Utama
-1. **Multi-Platform Native:** Otomatis mendeteksi sistem operasi (Windows CMD/PowerShell, Linux, Termux, macOS) dan menyesuaikan sintaks perintah terminal yang dihasilkan.
-2. **Auto-Read File:** Cukup sebutkan nama file (misal: `codex "periksa app.py dan perbaiki bug"`), Codex akan otomatis membaca isi file tersebut ke dalam konteks AI.
-3. **Auto-Create File:** Minta Codex membuat file (misal: `codex "buat file hitung.py fungsi tambah"`), file akan langsung tersimpan secara fisik.
-4. **Interactive Command Execution:** Rekomendasi perintah terminal dapat langsung dieksekusi dengan satu konfirmasi `[y/N]`.
-5. **Dual Backend Engine:**
-   - **Offline / Lokal:** Mendukung `llama.cpp` / `llama-server` (Termux & PC) dan `Ollama` (`ollama run qwen2.5-coder`).
-   - **Online / Cloud:** Otomatis menggunakan `GITHUB_TOKEN` jika offline engine tidak aktif.
+Asisten AI Coding, Terminal & Engineering Full-Stack untuk **Android Termux, Windows (PowerShell & CMD), Linux, macOS, dan Visual Studio Code**.
 
 ---
 
-## 💻 Cara Install & Menggunakan di Laptop / Komputer
+## 🚀 3 Cara Menggunakan Codex
 
-### 1. Di Windows (PowerShell / CMD)
-Pastikan Python 3 sudah terpasang di Windows.
+### 1. 📱 Mode GUI Visual (Android & Laptop Browser)
+Codex dilengkapi Web GUI modern, responsif, dan bertema gelap (Dark Mode) yang dapat dibuka langsung di browser HP maupun Laptop:
 
-```powershell
-# 1. Download file codex.py
-curl -O https://raw.githubusercontent.com/ComitIdn/codex-cli/main/codex.py
+```bash
+# Jalankan GUI di Termux atau Windows/Linux:
+codex --gui
+```
+* **Di HP (Android):** Browser Chrome akan otomatis terbuka mengarah ke `http://127.0.0.1:5000`.
+* **Di Laptop (Windows/PC):** Browser default akan otomatis terbuka menampilkan antarmuka visual mirip ChatGPT / Claude Studio.
 
-# 2. (Opsional) Jika ingin menggunakan AI lokal di Windows, pasang Ollama:
-# Download dari https://ollama.com lalu jalankan:
-# ollama run qwen2.5-coder
+---
 
-# 3. Jalankan Codex di Windows:
-python codex.py "buatkan script powershell untuk monitor cpu"
+### 2. 💻 Mode Visual Studio Code (VS Code Integration)
+Anda bisa menggunakan Codex langsung di dalam VS Code dengan **2 metode**:
 
-# Atau masuk ke mode interaktif chat:
-python codex.py
+#### Metode A: Tampilan Panel GUI Langsung di VS Code
+1. Jalankan `codex --gui` di terminal terintegrasi VS Code (`Ctrl + ~`).
+2. Di VS Code, tekan **`Ctrl + Shift + P`** (atau `Cmd + Shift + P` di Mac).
+3. Ketik dan pilih: **`Simple Browser: Show`**.
+4. Masukkan URL: `http://127.0.0.1:5000`.
+5. Panel AI Codex akan langsung muncul di samping editor kode Anda!
+
+#### Metode B: Menggunakan Ekstensi AI VS Code (Continue / CodeGPT)
+Codex menyediakan server API yang kompatibel dengan format OpenAI (`/v1/chat/completions`).
+1. Pasang ekstensi **[Continue](https://continue.dev)** atau **CodeGPT** dari VS Code Marketplace.
+2. Di pengaturan ekstensi `config.json`, tambahkan Codex sebagai provider lokal:
+```json
+{
+  "models": [
+    {
+      "title": "Codex AI Local",
+      "provider": "openai",
+      "model": "codex-ai",
+      "apiBase": "http://127.0.0.1:5000/v1"
+    }
+  ]
+}
+```
+Sekarang Anda bisa memakai fitur *autocomplete*, *inline edit*, dan *code explanation* asli VS Code langsung menggunakan otak Codex!
+
+---
+
+### 3. ⚡ Mode Terminal CLI Cepat
+```bash
+# Tanya langsung atau buat file:
+codex "buat file hitung.py fungsi tambah"
+
+# Buka mode obrolan interaktif:
+codex
+
+# Cek struktur folder proyek:
+codex /tree
+
+# Compile otomatis (Maven, Gradle, NPM, Composer, Make):
+codex /build
 ```
 
-### 2. Di Linux / macOS
+---
+
+## 📥 Instalasi di Laptop / Komputer Baru
+
+### Di Windows (PowerShell / CMD)
+```powershell
+curl -O https://raw.githubusercontent.com/ComitIdn/codex-cli/main/codex.py
+python codex.py --gui
+```
+
+### Di Linux / macOS
 ```bash
-# 1. Download & beri izin eksekusi
 curl -sLO https://raw.githubusercontent.com/ComitIdn/codex-cli/main/codex.py
 chmod +x codex.py
 sudo mv codex.py /usr/local/bin/codex
-
-# 2. Jalankan kapan saja:
-codex "buatkan script bash backup"
-codex
-```
-
-### 3. Di Android Termux
-Sudah terpasang secara otomatis! Cukup ketik:
-```bash
-codex "pertanyaan atau kode"
-# atau
-codex
+codex --gui
 ```
